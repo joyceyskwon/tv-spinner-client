@@ -5,12 +5,12 @@ const ShowList = props => {
 
   return (
     <div>
-    {props.shows.map( show => {
-      return <Show
-        key={show.id}
-        show={show}
-      />
-    })}
+      {props.shows.map( show => {
+        return <Show
+          key={show.id}
+          show={show}
+        />
+      })}
     </div>
   )
 }

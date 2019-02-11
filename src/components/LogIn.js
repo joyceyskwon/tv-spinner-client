@@ -3,7 +3,9 @@ import React from 'react'
 export default class LogIn extends React.Component {
 
   state = {
-    loginClicked: false
+    loginClicked: false,
+    name: '',
+    password: ''
   }
 
   showLoginForm = e => {
@@ -12,6 +14,21 @@ export default class LogIn extends React.Component {
     })
   }
 
+  handleLoginChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleLoginSubmit = e => {
+    this.props.handleLoginSubmit(e)
+    this.setState(preState => {
+      return {
+        username: '',
+        password: ''
+      }
+    })
+  }
 
   render() {
     return (
@@ -23,9 +40,18 @@ export default class LogIn extends React.Component {
         </button>
 
         {this.state.loginClicked &&
-          <form>
-          <input type="text" name="name" placeholder="Username" />
-          <input type="password" name="password" placeholder="Password" />
+          <form onSubmit={e => this.handleLoginSubmit(e)}>
+          <input
+            onChange={e => this.handleLoginChange(e)}
+            type="text" name="name"
+            placeholder="Username"
+          />
+          <input
+            onChange={e => this.handleLoginChange(e)}
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
           <input type="Submit" value="Login" />
           </form>
         }

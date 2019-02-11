@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ShowList from './ShowList'
+import Filter from './Filter'
 
 export default class ShowContainer extends Component {
 
@@ -21,9 +22,16 @@ export default class ShowContainer extends Component {
     })
   }
 
+  filteredShows = () => {
+    return this.state.shows.filter(show => {
+      return show.genre
+    })
+  }
+
   render() {
     return (
       <div>
+        <Filter />
         <ShowList
           shows={this.state.shows}
         />

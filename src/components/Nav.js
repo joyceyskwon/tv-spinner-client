@@ -7,9 +7,16 @@ export default class Nav extends React.Component {
   render() {
     return (
       <div>
-        <h1>TV Spinner</h1>
-        <LogIn />
-        <SignUp />
+        
+
+        <LogIn
+          handleLoginSubmit={this.props.handleLoginSubmit}
+        />
+        <SignUp
+          handleSignUpSubmit={this.props.handleSignUpSubmit}
+        />
+        // if the user is logged in, show their name that links to their profile
+
       </div>
     )
   }
