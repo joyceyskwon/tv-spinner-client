@@ -4,58 +4,23 @@ import Filter from './Filter'
 
 export default class ShowContainer extends Component {
 
-  state = {
-    shows: [],
-    genre: '',
-    schedule: '',
-    rating: 0
-  }
-
-  componentDidMount() {
-    this.fetchAllShows()
-  }
-
-  fetchAllShows = () => {
-    fetch('http://localhost:3000/api/v1/shows')
-    .then(r => r.json())
-    .then(shows => {
-      this.setState({
-        shows
-      })
-    })
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleSubmit = e => {
-    e.preventDefault()
-    this.filterShows()
-  }
-
-  filterShows = () => {
-    return this.state.shows.filter(show => {
-      return show.genre.toLowerCase().includes(this.state.genre.toLowerCase()) && show.schedule.toLowerCase().includes(this.state.schedule.toLowerCase()) && show.rating < this.state.rating
-    })
-  }
-
   render() {
     return (
       <div>
         <Filter
-          genre={this.state.genre}
-          schedule={this.state.schedule}
-          rating={this.state.rating}
-          handleChange={this.handleChange}
-          handleSubmit={this.filterShows}
+          genre={this.props.genre}
+          schedule={this.props.schedule}
+          rating={this.props.rating}
+          handleChange={this.props.handleChange}
+          handleSubmit={this.props.handleSubmit}
         />
         <ShowList
-          shows={this.filterShows()}
+          visibility={this.props.visibility}
+          handleSubmit={this.props.handleSubmit}
+          shows={this.props.filterShows}
         />
       </div>
     )
   }
+
 }
