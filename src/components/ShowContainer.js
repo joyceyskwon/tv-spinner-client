@@ -5,7 +5,10 @@ import Filter from './Filter'
 export default class ShowContainer extends Component {
 
   state = {
-    shows: []
+    shows: [],
+    genre: '',
+    schedule: '',
+    rating: 0
   }
 
   componentDidMount() {
@@ -22,18 +25,35 @@ export default class ShowContainer extends Component {
     })
   }
 
-  filteredShows = () => {
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    this.filterShows()
+  }
+
+  filterShows = () => {
     return this.state.shows.filter(show => {
-      return show.genre
+      return show.genre.toLowerCase().includes(this.state.genre.toLowerCase()) && show.schedule.toLowerCase().includes(this.state.schedule.toLowerCase()) && show.rating < this.state.rating
     })
   }
 
   render() {
     return (
       <div>
-        <Filter />
+        <Filter
+          genre={this.state.genre}
+          schedule={this.state.schedule}
+          rating={this.state.rating}
+          handleChange={this.handleChange}
+          handleSubmit={this.filterShows}
+        />
         <ShowList
-          shows={this.state.shows}
+          shows={this.filterShows()}
         />
       </div>
     )
