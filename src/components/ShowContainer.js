@@ -32,9 +32,7 @@ export default class ShowContainer extends Component {
     return (
       <div>
         <Filter />
-        <ShowList
-          shows={this.state.shows}
-        />
+        <ShowList shows={this.state.shows} />
       </div>
     )
   }
