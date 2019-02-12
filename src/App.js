@@ -17,7 +17,8 @@ export default class App extends React.Component {
     loginPassword: '',
     signupClicked: false,
     signUpName: "",
-    signUpPassword: ""
+    signUpPassword: "",
+    errors: ""
   }
 
 /////// FETCH SHOW DATA //////////////////////////
@@ -54,7 +55,8 @@ export default class App extends React.Component {
     .then(loggedinUser => {
       console.log(loggedinUser)
       this.setState({
-        currentUser: loggedinUser
+        currentUser: loggedinUser,
+        errors: obj.message || ""
       })
     })
   }

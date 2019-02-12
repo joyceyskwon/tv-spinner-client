@@ -9,7 +9,6 @@ const SignUp = (props) => {
       >
       Sign Up
       </button>
-
       {props.signupClicked &&
         <form
           onSubmit={props.handleSignUpSubmit}
