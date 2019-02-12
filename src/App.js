@@ -43,6 +43,7 @@ export default class App extends React.Component {
       <div className="App">
         <h1>TV Spinner</h1>
         <Nav handleLoginSubmit={this.handleLoginSubmit} handleLoginChange={this.handleLoginChange} />
+        
         <ShowContainer />
       </div>
     )
