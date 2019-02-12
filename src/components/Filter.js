@@ -5,20 +5,56 @@ export default class Filter extends React.Component {
   render() {
     return (
       <div>
-        <select>
-          <option value='Action'>Action</option>
-          <option value='Anime'>Anime</option>
-          <option value='Crime'>Crime</option>
-          <option value='Drama'>Drama</option>
-          <option value='Espionage'>Espionage</option>
-          <option value='Fantasy'>Fantasy</option>
-          <option value='Horror'>Horror</option>
-          <option value='Sci-Fi'>Sci-Fi</option>
-          <option value='Supernatural'>Supernatural</option>
-          <option value='Romance'>Romance</option>
-          <option value='Thriller'>Thriller</option>
-          <option value='Mystery'>Mystery</option>
+        <select
+          onChange={e=>this.props.handleChange(e)}
+          name="genre"
+          value={this.props.genre}
+        >
+          <option value='action'>Action</option>
+          <option value='anime'>Anime</option>
+          <option value='crime'>Crime</option>
+          <option value='drama'>Drama</option>
+          <option value='espionage'>Espionage</option>
+          <option value='fantasy'>Fantasy</option>
+          <option value='horror'>Horror</option>
+          <option value='science-fiction'>Sci-Fi</option>
+          <option value='supernatural'>Supernatural</option>
+          <option value='romance'>Romance</option>
+          <option value='thriller'>Thriller</option>
+          <option value='mystery'>Mystery</option>
         </select>
+
+        <select
+          onChange={e=>this.props.handleChange(e)}
+          name="schedule"
+          value={this.props.schedule}
+        >
+          <option value='Sunday'>Sunday</option>
+          <option value='Monday'>Monday</option>
+          <option value='Tuesday'>Tuesday</option>
+          <option value='Wednesday'>Wednesday</option>
+          <option value='Thursday'>Thursday</option>
+          <option value='Friday'>Friday</option>
+          <option value='Saturday'>Saturday</option>
+        </select>
+
+        <label>Rating</label>
+        <input
+          onChange={e=>this.props.handleChange(e)}
+          value={this.props.rating}
+          name="rating"
+          type="range"
+          min="0"
+          max="10"
+        />
+
+        <button
+          onClick={e=>this.props.handleSubmit(e)}
+          type="submit"
+        >
+        Submit
+        </button>
+
       </div>
     )
   }

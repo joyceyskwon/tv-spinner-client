@@ -6,35 +6,46 @@ import Nav from './components/Nav'
 export default class App extends React.Component {
 
   state = {
-    currentUser: null,
-    name: '',
-    password: ''
+    shows: [],
+    visibility: 'hidden',
+    genre: '',
+    schedule: '',
+    rating: 0
   }
 
-  handleLoginSubmit = e => {
-    e.preventDefault()
-    fetch(`http://localhost:3000/api/v1/users/${this.state.name}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body:JSON.stringify({
-        user: {
-          name: this.state.name,
-          password: this.state.password
-        }
+  componentDidMount() {
+    this.fetchAllShows()
+  }
+
+  fetchAllShows = () => {
+    fetch('http://localhost:3000/api/v1/shows')
+    .then(r => r.json())
+    .then(shows => {
+      this.setState({
+        shows
       })
     })
-    .then(r => r.json())
-    .then(obj => {
-      console.log(obj)
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
     })
   }
 
-  handleLoginChange = e => {
+  handleSubmit = e => {
+    e.preventDefault()
     this.setState({
-      [e.target.name]: e.target.value
+      visibility: 'visible'
+    })
+    console.log("is it working?");
+    this.filterShows()
+  }
+
+  filterShows = e => {
+    // e.preventDefault()
+    return this.state.shows.filter(show => {
+      return show.genre.toLowerCase().includes(this.state.genre.toLowerCase()) && show.schedule.toLowerCase().includes(this.state.schedule.toLowerCase()) && show.rating < this.state.rating
     })
   }
 
@@ -43,7 +54,15 @@ export default class App extends React.Component {
       <div className="App">
         <h1>TV Spinner</h1>
         <Nav handleLoginSubmit={this.handleLoginSubmit} handleLoginChange={this.handleLoginChange} />
-        <ShowContainer />
+        <ShowContainer
+          genre={this.state.genre}
+          schedule={this.state.schedule}
+          rating={this.state.rating}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          visibility={this.state.visibility}
+          filterShows={this.filterShows()}
+        />
       </div>
     )
   }
