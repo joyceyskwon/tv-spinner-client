@@ -57,7 +57,7 @@ export default class App extends React.Component {
 
       this.setState({
         currentUser: loggedinUser.name || null,
-        errors: loggedinUser.errors
+        errors: loggedinUser.message || ""
       })
     })
   }
