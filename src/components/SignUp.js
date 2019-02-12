@@ -5,7 +5,8 @@ export default class SignUp extends React.Component {
   state = {
     signupClicked: false,
     name: "",
-    password: ""
+    password: "",
+    errors: ""
   }
 
   handleSignUpSubmit = (event) => {
@@ -22,6 +23,13 @@ export default class SignUp extends React.Component {
           password: this.state.password
         }
       })
+    })
+    .then(r => r.json())
+    .then(obj => {
+      this.setState({
+        errors: obj.message || ""
+      })
+      console.log(this.state.errors);
     })
     event.target.reset()
   }
