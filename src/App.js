@@ -16,11 +16,12 @@ export default class App extends React.Component {
     loginName: '',
     loginPassword: '',
     signupClicked: false,
-    signUpName: "",
-    signUpPassword: ""
+    signUpName: '',
+    signUpPassword: '',
+    errors: ''
   }
 
-/////// FETCH SHOW DATA //////////////////////////
+/////// FETCH SHOW DATA //////////////////////////////////
   componentDidMount() {
     this.fetchAllShows()
   }
@@ -34,7 +35,7 @@ export default class App extends React.Component {
       })
     })
   }
-  /////// LOG IN ///////////////////////////////
+  /////// LOG IN ///////////////////////////////////////
   handleLoginSubmit = e => {
     e.preventDefault()
     fetch(`http://localhost:3000/api/v1/users/${this.state.loginName}`, {
@@ -53,8 +54,10 @@ export default class App extends React.Component {
     .then(r => r.json())
     .then(loggedinUser => {
       console.log(loggedinUser)
+
       this.setState({
-        currentUser: loggedinUser
+        currentUser: loggedinUser.name || null,
+        errors: loggedinUser.errors
       })
     })
   }
@@ -71,7 +74,7 @@ export default class App extends React.Component {
     })
   }
 
-  /////// SIGN UP ///////////////////////////////
+  /////// SIGN UP /////////////////////////////////////
   showSignUpForm = e => {
     this.setState({
       signupClicked: !this.state.signupClicked
@@ -97,7 +100,8 @@ export default class App extends React.Component {
     .then(newUser => {
       console.log(newUser)
       this.setState({
-        currentUser: newUser
+        currentUser: newUser.name || null,
+        errors: newUser.errors
       })
     })
   }
@@ -108,7 +112,7 @@ export default class App extends React.Component {
     })
   }
 
-  //////////// FILTER ///////////////////////////
+  //////////// FILTER ////////////////////////////////
   handleFilterChange = e => {
     this.setState({
       [e.target.name]: e.target.value
