@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import ShowContainer from './components/ShowContainer'
-// import Nav from './components/Nav'
+import Nav from './components/Nav'
 
 export default class App extends React.Component {
 
@@ -53,6 +53,7 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <h1>TV Spinner</h1>
+        <Nav handleLoginSubmit={this.handleLoginSubmit} handleLoginChange={this.handleLoginChange} />
         <ShowContainer
           genre={this.state.genre}
           schedule={this.state.schedule}

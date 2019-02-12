@@ -4,8 +4,32 @@ export default class SignUp extends React.Component {
 
   state = {
     signupClicked: false,
-    name: '',
-    password: ''
+    name: "",
+    password: ""
+  }
+
+  handleSignUpSubmit = (event) => {
+    event.preventDefault()
+    fetch('http://localhost:3000/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          name: this.state.name,
+          password: this.state.password
+        }
+      })
+    })
+    event.target.reset()
+  }
+
+  handleSignUpInputs = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
   }
 
   showSignUpForm = e => {
@@ -14,50 +38,27 @@ export default class SignUp extends React.Component {
     })
   }
 
-  handleSignUpChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleSignUpSubmit = e => {
-    this.props.handleSignUpSubmit(e)
-    this.setState(preState => {
-      return {
-        username: '',
-        password: ''
-      }
-    })
-  }
-
   render() {
     return (
       <div>
-        <button
-          onClick={() => this.showSignUpForm()}
-        >
+        <button onClick={this.showSignUpForm}>
           Sign Up
         </button>
-
         {this.state.signupClicked &&
-          <form
-            onSubmit={e=>this.handleSignUpSubmit(e)}
-          >
+          <form onSubmit={this.handleSignUpSubmit}>
             <input
+              onChange={this.handleSignUpInputs}
               type="text"
               name="name"
               placeholder="Username"
             />
             <input
-              onChange={e=>this.handleSignUpChange(e)} type="password"
+              onChange={this.handleSignUpInputs}
+              type="password"
               name="password"
               placeholder="Password"
             />
-            <input
-              onChange={e=>this.handleSignUpChange(e)}
-              type="Submit"
-              value="Sign Up"
-            />
+            <input type="Submit" />
           </form>
         }
       </div>
