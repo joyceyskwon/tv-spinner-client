@@ -2,14 +2,25 @@ import React from 'react'
 import LogIn from './LogIn'
 import SignUp from './SignUp'
 
-export default class Nav extends React.Component {
+const Nav = (props) => {
 
-  render() {
-    return (
-      <div>
-      <LogIn handleLoginSubmit={this.props.handleLoginSubmit} handleLoginChange={this.props.handleLoginChange} />
-      <SignUp />
-      </div>
-    )
-  }
+  return (
+    <div>
+    <LogIn
+      handleLoginSubmit={props.handleLoginSubmit}
+      handleLoginChange={props.handleLoginChange}
+      loginClicked={props.loginClicked}
+      showLoginForm={props.showLoginForm}
+    />
+    <SignUp
+      handleSignUpSubmit={props.handleSignUpSubmit}
+      handleSignUpInputs={props.handleSignUpInputs}
+      signupClicked={props.signupClicked}
+      showSignUpForm={props.showSignUpForm}
+    />
+    </div>
+  )
+
 }
+
+export default Nav

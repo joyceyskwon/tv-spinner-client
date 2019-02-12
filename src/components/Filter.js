@@ -6,7 +6,7 @@ export default class Filter extends React.Component {
     return (
       <div>
         <select
-          onChange={e=>this.props.handleChange(e)}
+          onChange={e=>this.props.handleFilterChange(e)}
           name="genre"
           value={this.props.genre}
         >
@@ -25,7 +25,7 @@ export default class Filter extends React.Component {
         </select>
 
         <select
-          onChange={e=>this.props.handleChange(e)}
+          onChange={e=>this.props.handleFilterChange(e)}
           name="schedule"
           value={this.props.schedule}
         >
@@ -40,7 +40,7 @@ export default class Filter extends React.Component {
 
         <label>Rating</label>
         <input
-          onChange={e=>this.props.handleChange(e)}
+          onChange={e=>this.props.handleFilterChange(e)}
           value={this.props.rating}
           name="rating"
           type="range"

@@ -11,7 +11,7 @@ export default class ShowContainer extends Component {
           genre={this.props.genre}
           schedule={this.props.schedule}
           rating={this.props.rating}
-          handleChange={this.props.handleChange}
+          handleFilterChange={this.props.handleFilterChange}
           handleSubmit={this.props.handleSubmit}
         />
         <ShowList

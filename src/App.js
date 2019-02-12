@@ -12,10 +12,15 @@ export default class App extends React.Component {
     schedule: '',
     rating: 0,
     currentUser: null,
-    name: '',
-    password: ''
+    loginClicked: false,
+    loginName: '',
+    loginPassword: '',
+    signupClicked: false,
+    signUpName: "",
+    signUpPassword: ""
   }
 
+/////// FETCH SHOW DATA //////////////////////////
   componentDidMount() {
     this.fetchAllShows()
   }
@@ -29,10 +34,10 @@ export default class App extends React.Component {
       })
     })
   }
-
+  /////// LOG IN ///////////////////////////////
   handleLoginSubmit = e => {
     e.preventDefault()
-    fetch(`http://localhost:3000/api/v1/users/${this.state.name}`, {
+    fetch(`http://localhost:3000/api/v1/users/${this.state.loginName}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,14 +45,17 @@ export default class App extends React.Component {
       },
       body:JSON.stringify({
         user: {
-          name: this.state.name,
-          password: this.state.password
+          name: this.state.loginName,
+          password: this.state.loginPassword
         }
       })
     })
     .then(r => r.json())
-    .then(obj => {
-      console.log(obj)
+    .then(loggedinUser => {
+      console.log(loggedinUser)
+      this.setState({
+        currentUser: loggedinUser
+      })
     })
   }
 
@@ -57,7 +65,51 @@ export default class App extends React.Component {
     })
   }
 
-  handleChange = e => {
+  showLoginForm = () => {
+    this.setState({
+      loginClicked: !this.state.loginClicked
+    })
+  }
+
+  /////// SIGN UP ///////////////////////////////
+  showSignUpForm = e => {
+    this.setState({
+      signupClicked: !this.state.signupClicked
+    })
+  }
+
+  handleSignUpSubmit = (event) => {
+    event.preventDefault()
+    fetch('http://localhost:3000/api/v1/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          name: this.state.signUpName,
+          password: this.state.signUpPassword
+        }
+      })
+    })
+    .then( r => r.json())
+    .then(newUser => {
+      console.log(newUser)
+      this.setState({
+        currentUser: newUser
+      })
+    })
+  }
+
+  handleSignUpInputs = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  //////////// FILTER ///////////////////////////
+  handleFilterChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -73,7 +125,6 @@ export default class App extends React.Component {
   }
 
   filterShows = e => {
-    // e.preventDefault()
     return this.state.shows.filter(show => {
       return show.genre.toLowerCase().includes(this.state.genre.toLowerCase()) && show.schedule.toLowerCase().includes(this.state.schedule.toLowerCase()) && show.rating < this.state.rating
     })
@@ -83,16 +134,28 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <h1>TV Spinner</h1>
-        <Nav handleLoginSubmit={this.handleLoginSubmit} handleLoginChange={this.handleLoginChange} />
-        <ShowContainer
-          genre={this.state.genre}
-          schedule={this.state.schedule}
-          rating={this.state.rating}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          visibility={this.state.visibility}
-          filterShows={this.filterShows()}
-        />
+        {!this.state.currentUser ?
+          <Nav
+            handleLoginChange={this.handleLoginChange}
+            handleLoginSubmit={this.handleLoginSubmit}
+            loginClicked={this.state.loginClicked}
+            showLoginForm={this.showLoginForm}
+            signupClicked={this.state.signupClicked}
+            showSignUpForm={this.showSignUpForm}
+            handleSignUpSubmit={this.handleSignUpSubmit}
+            handleSignUpInputs={this.handleSignUpInputs}
+          />
+        :
+          <ShowContainer
+            genre={this.state.genre}
+            schedule={this.state.schedule}
+            rating={this.state.rating}
+            handleFilterChange={this.handleFilterChange}
+            handleSubmit={this.handleSubmit}
+            visibility={this.state.visibility}
+            filterShows={this.filterShows()}
+          />
+        }
       </div>
     )
   }
