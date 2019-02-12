@@ -10,7 +10,10 @@ export default class App extends React.Component {
     visibility: 'hidden',
     genre: '',
     schedule: '',
-    rating: 0
+    rating: 0,
+    currentUser: null,
+    name: '',
+    password: ''
   }
 
   componentDidMount() {
@@ -24,6 +27,33 @@ export default class App extends React.Component {
       this.setState({
         shows
       })
+    })
+  }
+
+  handleLoginSubmit = e => {
+    e.preventDefault()
+    fetch(`http://localhost:3000/api/v1/users/${this.state.name}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body:JSON.stringify({
+        user: {
+          name: this.state.name,
+          password: this.state.password
+        }
+      })
+    })
+    .then(r => r.json())
+    .then(obj => {
+      console.log(obj)
+    })
+  }
+
+  handleLoginChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
     })
   }
 
