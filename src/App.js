@@ -13,7 +13,8 @@ export default class App extends React.Component {
     rating: 0,
     currentUser: null,
     name: '',
-    password: ''
+    password: '',
+    errors: ""
   }
 
   componentDidMount() {
@@ -47,8 +48,12 @@ export default class App extends React.Component {
     })
     .then(r => r.json())
     .then(obj => {
-      console.log(obj)
+      this.setState({
+        errors: obj.message || ""
+      })
+      console.log(this.state.errors);
     })
+    e.target.reset()
   }
 
   handleLoginChange = e => {
