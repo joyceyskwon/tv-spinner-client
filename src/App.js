@@ -52,6 +52,7 @@ export default class App extends React.Component {
         errors: obj.message || ""
       })
       console.log(this.state.errors);
+      console.log(obj);
     })
     e.target.reset()
   }
