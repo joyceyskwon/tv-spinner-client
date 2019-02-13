@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import './assets/App.css'
 import ShowContainer from './components/ShowContainer'
 import Nav from './components/Nav'
 
@@ -7,7 +7,6 @@ export default class App extends React.Component {
 
   state = {
     shows: [],
-    visibility: 'hidden',
     genre: '',
     schedule: '',
     rating: 0,
@@ -102,7 +101,7 @@ export default class App extends React.Component {
       console.log(newUser)
       this.setState({
         currentUser: newUser.name || null,
-        errors: newUser.message
+        errors: newUser.message || ""
       })
     })
   }
@@ -148,6 +147,7 @@ export default class App extends React.Component {
             showSignUpForm={this.showSignUpForm}
             handleSignUpSubmit={this.handleSignUpSubmit}
             handleSignUpInputs={this.handleSignUpInputs}
+            currentUser={this.state.currentUser}
           />
         :
           <ShowContainer
@@ -156,7 +156,6 @@ export default class App extends React.Component {
             rating={this.state.rating}
             handleFilterChange={this.handleFilterChange}
             handleSubmit={this.handleSubmit}
-            visibility={this.state.visibility}
             filterShows={this.filterShows()}
           />
         }

@@ -6,18 +6,18 @@ const Nav = (props) => {
 
   return (
     <div>
-    <LogIn
-      handleLoginSubmit={props.handleLoginSubmit}
-      handleLoginChange={props.handleLoginChange}
-      loginClicked={props.loginClicked}
-      showLoginForm={props.showLoginForm}
-    />
-    <SignUp
-      handleSignUpSubmit={props.handleSignUpSubmit}
-      handleSignUpInputs={props.handleSignUpInputs}
-      signupClicked={props.signupClicked}
-      showSignUpForm={props.showSignUpForm}
-    />
+        <LogIn
+          handleLoginSubmit={props.handleLoginSubmit}
+          handleLoginChange={props.handleLoginChange}
+          loginClicked={props.loginClicked}
+          showLoginForm={props.showLoginForm}
+        />
+        <SignUp
+          handleSignUpSubmit={props.handleSignUpSubmit}
+          handleSignUpInputs={props.handleSignUpInputs}
+          signupClicked={props.signupClicked}
+          showSignUpForm={props.showSignUpForm}
+        />
     </div>
   )
 

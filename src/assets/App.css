@@ -30,3 +30,8 @@
     transform: rotate(360deg);
   }
 }
+
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+}

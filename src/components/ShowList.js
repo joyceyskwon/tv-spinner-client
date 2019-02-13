@@ -8,7 +8,6 @@ const ShowList = props => {
   return (
     <Card.Group itemsPerRow={3}
       id="show-list"
-      style={{visibility: props.visibility}}
     >
       {
         props.shows.map( show => {
