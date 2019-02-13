@@ -18,7 +18,8 @@ export default class App extends React.Component {
     signupClicked: false,
     signUpName: '',
     signUpPassword: '',
-    errors: ''
+    errors: '',
+    favorites: []
   }
 
 /////// FETCH SHOW DATA //////////////////////////////////
@@ -101,7 +102,7 @@ export default class App extends React.Component {
       console.log(newUser)
       this.setState({
         currentUser: newUser.name || null,
-        errors: newUser.errors
+        errors: newUser.message
       })
     })
   }
@@ -124,7 +125,6 @@ export default class App extends React.Component {
     this.setState({
       visibility: 'visible'
     })
-    console.log("is it working?");
     this.filterShows()
   }
 

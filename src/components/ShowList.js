@@ -1,11 +1,12 @@
 import React from 'react'
 import Show from './Show'
 import './ShowList.css'
+import { Card } from 'semantic-ui-react'
 
 const ShowList = props => {
 
   return (
-    <div
+    <Card.Group itemsPerRow={3}
       id="show-list"
       style={{visibility: props.visibility}}
     >
@@ -17,7 +18,7 @@ const ShowList = props => {
           />
         })
       }
-    </div>
+    </Card.Group>
   )
 }
 
