@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import ShowList from './ShowList'
 import Filter from './Filter'
+import CurrentUser from './CurrentUser'
 
 export default class ShowContainer extends Component {
 
   render() {
     return (
       <div>
+        <CurrentUser />
         <Filter
           genre={this.props.genre}
           schedule={this.props.schedule}
@@ -15,7 +17,6 @@ export default class ShowContainer extends Component {
           handleSubmit={this.props.handleSubmit}
         />
         <ShowList
-          visibility={this.props.visibility}
           handleSubmit={this.props.handleSubmit}
           shows={this.props.filterShows}
         />
