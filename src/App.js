@@ -17,7 +17,8 @@ export default class App extends React.Component {
     signupClicked: false,
     signUpName: '',
     signUpPassword: '',
-    errors: ''
+    errors: '',
+    favorites: []
   }
 
 /////// FETCH SHOW DATA //////////////////////////////////
@@ -120,6 +121,9 @@ export default class App extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    this.setState({
+      visibility: 'visible'
+    })
     this.filterShows()
   }
 

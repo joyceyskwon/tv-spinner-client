@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, Icon } from 'semantic-ui-react'
 
 export default class Filter extends React.Component {
 
@@ -48,13 +49,15 @@ export default class Filter extends React.Component {
           max="10"
         />
 
-        <button
+        <Button animated
           onClick={e=>this.props.handleSubmit(e)}
           type="submit"
         >
-        Submit
-        </button>
-
+        <Button.Content visible>Generate!</Button.Content>
+        <Button.Content hidden>
+          <Icon name='arrow right' />
+        </Button.Content>
+        </Button>
       </div>
     )
   }
