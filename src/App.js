@@ -2,8 +2,6 @@ import React from 'react'
 import './assets/App.css'
 import ShowContainer from './components/ShowContainer'
 import Nav from './components/Nav'
-// import { Switch, Route, Redirect } from 'react-router-dom'
-import ShowInfo from './components/ShowInfo'
 
 export default class App extends React.Component {
 
@@ -137,9 +135,12 @@ export default class App extends React.Component {
     })
   }
 
-  handleAddFavorite = () => {
-    const clickedShow = this.state.clickedShow
-    if (!this.state.currentUser.favorites.find(favorite => favorite.show_id === clickedShow.id)) {
+  handleAddFavorite = (showId) => {
+    const foundShow = this.state.shows.find(show=>show.id===showId)
+    this.setState({
+      clickedShow: foundShow
+    })
+    if (!this.state.currentUser.favorites.find(favorite => favorite.show_id === foundShow.id)) {
       fetch('http://localhost:3000/api/v1/favorites', {
         method: "POST",
         headers: {
@@ -148,19 +149,25 @@ export default class App extends React.Component {
         },
         body: JSON.stringify({
           user_id: this.state.currentUser.id,
-          show_id: clickedShow.id
+          show_id: foundShow.id
         })
       })
-      .then(r => r.json())
-      .then(updatedData => {
+      .then(updatedData=>{
         this.setState({
-          clickedShow: { ...this.state.clickedShow, favorites: [...this.state.clickedShow.favorites, updatedData] },
-          currentUser: { ...this.state.currentUser, favorites: [...this.state.currentUser.favorites, updatedData] }
-         })
+          shows: this.state.shows.slice(),
+          clickedShow: {...this.state.clickedShow, favorites: [...this.state.clickedShow.favorites, updatedData]}
+        },()=>console.log(this.state.clickedShow.favorites.length))
       })
+
+      // .then(updatedData => {
+      //   this.setState({
+      //     clickedShow: { ...this.state.clickedShow, favorites: [...this.state.clickedShow.favorites, updatedData] },
+      //     currentUser: { ...this.state.currentUser, favorites: [...this.state.currentUser.favorites, updatedData] }
+      //    })
+      // })
     } else {
       let foundFavorite = this.state.currentUser.favorites.find(favorite => {
-        return favorite.show_id === clickedShow.id
+        return favorite.show_id === foundShow.id
       })
       fetch(`http://localhost:3000/api/v1/favorites/${foundFavorite.id}`, {method: "DELETE"})
       .then(r => {
@@ -196,6 +203,8 @@ export default class App extends React.Component {
             handleFilterChange={this.handleFilterChange}
             handleSubmit={this.handleSubmit}
             filterShows={this.filterShows()}
+            handleAddFavorite={this.handleAddFavorite}
+            clickedShow={this.state.clickedShow}
           />
         }
       </div>

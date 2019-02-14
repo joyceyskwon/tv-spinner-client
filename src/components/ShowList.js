@@ -14,7 +14,7 @@ const ShowList = props => {
           return <Show
             key={show.id}
             show={show}
-            handleShowPageClick={props.handleShowPageClick}
+            handleAddFavorite={props.handleAddFavorite}
           />
         })
       }
