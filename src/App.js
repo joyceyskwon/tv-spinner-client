@@ -154,18 +154,15 @@ export default class App extends React.Component {
         })
       })
       .then(updatedData=>{
+        let a = this.state.shows.indexOf(foundShow)
+        let showFound = this.state.shows[a]
+        showFound.favorites = [...showFound.favorites, updatedData]
         this.setState({
-          shows: this.state.shows.slice(),
-          clickedShow: {...this.state.clickedShow, favorites: [...this.state.clickedShow.favorites, updatedData]}
-        },()=>console.log(this.state.clickedShow.favorites.length))
+          currentUser: { ...this.state.currentUser, favorites: [...this.state.currentUser.favorites, updatedData] },
+          clickedShow: {...this.state.clickedShow, favorites: [...this.state.clickedShow.favorites, updatedData]},
+          shows: this.state.shows,
+        })
       })
-
-      // .then(updatedData => {
-      //   this.setState({
-      //     clickedShow: { ...this.state.clickedShow, favorites: [...this.state.clickedShow.favorites, updatedData] },
-      //     currentUser: { ...this.state.currentUser, favorites: [...this.state.currentUser.favorites, updatedData] }
-      //    })
-      // })
     } else {
       let foundFavorite = this.state.currentUser.favorites.find(favorite => {
         return favorite.show_id === foundShow.id
