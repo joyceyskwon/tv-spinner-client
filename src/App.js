@@ -3,6 +3,8 @@ import './assets/App.css'
 import ShowContainer from './components/ShowContainer'
 import Authentication from './components/Authentication'
 import Nav from './components/Nav'
+// import { Switch, Route, Redirect } from 'react-router-dom'
+import ShowInfo from './components/ShowInfo'
 
 export default class App extends React.Component {
 
@@ -19,7 +21,7 @@ export default class App extends React.Component {
     signUpName: '',
     signUpPassword: '',
     errors: '',
-    favorites: []
+    clickedShow: null,
   }
 
 /////// FETCH SHOW DATA //////////////////////////////////
@@ -54,11 +56,9 @@ export default class App extends React.Component {
     })
     .then(r => r.json())
     .then(loggedinUser => {
-      console.log(loggedinUser)
-
       this.setState({
-        currentUser: loggedinUser.name || null,
-        errors: loggedinUser.message || ""
+        currentUser: loggedinUser || null,
+        errors: loggedinUser.message || "",
       })
     })
   }
@@ -101,8 +101,8 @@ export default class App extends React.Component {
     .then(newUser => {
       console.log(newUser)
       this.setState({
-        currentUser: newUser.name || null,
-        errors: newUser.message || ""
+        currentUser: newUser || null,
+        errors: newUser.message
       })
     })
   }
@@ -128,10 +128,50 @@ export default class App extends React.Component {
     this.filterShows()
   }
 
+  handleShowPageClick = (showObj) => {
+    this.setState({ clickedShow: showObj })
+  }
+
   filterShows = e => {
     return this.state.shows.filter(show => {
       return show.genre.toLowerCase().includes(this.state.genre.toLowerCase()) && show.schedule.toLowerCase().includes(this.state.schedule.toLowerCase()) && show.rating < this.state.rating
     })
+  }
+
+  handleAddFavorite = () => {
+    const clickedShow = this.state.clickedShow
+    if (!this.state.currentUser.favorites.find(favorite => favorite.show_id === clickedShow.id)) {
+      fetch('http://localhost:3000/api/v1/favorites', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          user_id: this.state.currentUser.id,
+          show_id: clickedShow.id
+        })
+      })
+      .then(r => r.json())
+      .then(updatedData => {
+        this.setState({
+          clickedShow: { ...this.state.clickedShow, favorites: [...this.state.clickedShow.favorites, updatedData] },
+          currentUser: { ...this.state.currentUser, favorites: [...this.state.currentUser.favorites, updatedData] }
+         })
+      })
+    } else {
+      let foundFavorite = this.state.currentUser.favorites.find(favorite => {
+        return favorite.show_id === clickedShow.id
+      })
+      fetch(`http://localhost:3000/api/v1/favorites/${foundFavorite.id}`, {method: "DELETE"})
+      .then(r => {
+        const newFavorites = this.state.clickedShow.favorites.filter(favorite => favorite.id !== foundFavorite.id)
+        this.setState({
+          clickedShow: { ...this.state.clickedShow, favorites: newFavorites },
+          currentUser: { ...this.state.currentUser, favorites: newFavorites }
+        })
+      })
+    }
   }
 
   render() {
