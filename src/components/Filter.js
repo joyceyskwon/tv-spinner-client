@@ -1,11 +1,13 @@
 import React from 'react'
-import { Button, Icon } from 'semantic-ui-react'
+import {Button, Icon } from 'semantic-ui-react'
 
 export default class Filter extends React.Component {
 
   render() {
     return (
       <div>
+
+
         <select
           onChange={e=>this.props.handleFilterChange(e)}
           name="genre"

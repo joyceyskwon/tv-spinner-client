@@ -74,7 +74,7 @@ export default class App extends React.Component {
     })
   }
 
-  /////// SIGN UP /////////////////////////////////////
+  /////// SIGN UP ////////////////////////////////////
   showSignUpForm = e => {
     this.setState({
       signupClicked: !this.state.signupClicked
@@ -136,7 +136,6 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>TV Spinner</h1>
         {!this.state.currentUser ?
           <Nav
             handleLoginChange={this.handleLoginChange}
