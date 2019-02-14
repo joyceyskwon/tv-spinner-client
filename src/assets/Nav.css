@@ -1,0 +1,45 @@
+.nav-container {
+  background: url("https://lightbox-prod.imgix.net/images/uploads/1523399335140-the-handmaids-tale_s2_1920x1080_16x9.jpg?auto=format&dpr=1&crop=faces%2Ctop%2Cright&fit=crop&w=1500&h=800") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 120px;
+  text-align: center;
+}
+
+.form-container {
+  display: inline-block;
+  padding: 100px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  background: #000;
+  border: 20px solid rgba(0, 0, 0, 0);
+  opacity: 0.6;
+  border-radius: 16px;
+}
+
+#logo {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: inline-block;
+	-webkit-animation: rotation 2s infinite linear;
+}
+
+p {
+  color: #fff;
+}
+
+@-webkit-keyframes rotation {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(359deg);
+	}
+}

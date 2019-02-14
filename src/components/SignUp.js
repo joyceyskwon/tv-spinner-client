@@ -1,15 +1,13 @@
 import React from 'react'
+import {Modal, Button} from 'react-materialize'
 
 const SignUp = (props) => {
-  
+
   return (
     <div>
-      <button
-        onClick={props.showSignUpForm}
-      >
-      Sign Up
-      </button>
-      {props.signupClicked &&
+      <Modal
+        header='Sign up'
+        trigger={<Button className='red' waves='light'>Sign Up</Button>}>
         <form
           onSubmit={props.handleSignUpSubmit}
         >
@@ -29,7 +27,7 @@ const SignUp = (props) => {
             type="Submit"
           />
         </form>
-      }
+      </Modal>
     </div>
   )
 }

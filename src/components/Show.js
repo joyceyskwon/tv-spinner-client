@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Icon } from 'semantic-ui-react'
+import { Button, Icon, Card, CardTitle, Toast } from 'react-materialize'
 
 const Show = props => {
 
@@ -9,24 +9,22 @@ const Show = props => {
 
   const fixedDescription = () => {
     const splitDescription = props.show.description.split("<p>").join(" ").split("</p>").join(" ").split("<b>").join(" ").split("</b>").join(" ")
-    if (splitDescription.length > 50) {
-      return [...splitDescription.slice(0, 150), "...."]
-    } else {
-      return splitDescription
-    }
+  //   if (splitDescription.length > 50) {
+  //     return [...splitDescription.slice(0, 150), "...."]
+  //   } else {
+  //     return splitDescription
+  //   }
   }
 
   return (
-    <React.Fragment>
-      <Card
-        fluid image={props.show.image}
-        header={props.show.title}
+      <Card header={<CardTitle reveal image={props.show.image} waves='light'/>}
         meta=<h4>Genre: {props.show.genre}</h4>
-        description={fixedDescription()}
-        extra=<h3>❤ {props.show.users.length}</h3>
-        onClick={() => props.handleShowPageClick(props.show)}
-      />
-    </React.Fragment>
+        title={props.show.title}
+        reveal={fixedDescription()}>
+        <Toast className='red' toast="Favorite added!"><Icon left>favorite</Icon>{props.show.users.length} favorite</Toast>
+        <Button className='red' waves='light'>{props.show.users.length}<Icon left>favorite</Icon></Button>
+        <p><a href={props.show.url}>Watch this show</a></p>
+      </Card>
   )
 }
 

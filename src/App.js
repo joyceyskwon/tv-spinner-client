@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import './assets/App.css'
 import ShowContainer from './components/ShowContainer'
 import Nav from './components/Nav'
 // import { Switch, Route, Redirect } from 'react-router-dom'
@@ -9,7 +9,6 @@ export default class App extends React.Component {
 
   state = {
     shows: [],
-    visibility: 'hidden',
     genre: '',
     schedule: '',
     rating: 0,
@@ -75,7 +74,7 @@ export default class App extends React.Component {
     })
   }
 
-  /////// SIGN UP /////////////////////////////////////
+  /////// SIGN UP ////////////////////////////////////
   showSignUpForm = e => {
     this.setState({
       signupClicked: !this.state.signupClicked
@@ -177,8 +176,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>TV Spinner</h1>
-        {(!this.state.currentUser) ?
+        {!this.state.currentUser ?
           <Nav
             handleLoginChange={this.handleLoginChange}
             handleLoginSubmit={this.handleLoginSubmit}
@@ -188,21 +186,17 @@ export default class App extends React.Component {
             showSignUpForm={this.showSignUpForm}
             handleSignUpSubmit={this.handleSignUpSubmit}
             handleSignUpInputs={this.handleSignUpInputs}
+            currentUser={this.state.currentUser}
           />
         :
-          (this.state.clickedShow) ?
-            <ShowInfo handleAddFavorite={this.handleAddFavorite} show={this.state.clickedShow} />
-          :
-            <ShowContainer
-              genre={this.state.genre}
-              schedule={this.state.schedule}
-              rating={this.state.rating}
-              handleFilterChange={this.handleFilterChange}
-              handleSubmit={this.handleSubmit}
-              visibility={this.state.visibility}
-              filterShows={this.filterShows()}
-              handleShowPageClick={this.handleShowPageClick}
-            />
+          <ShowContainer
+            genre={this.state.genre}
+            schedule={this.state.schedule}
+            rating={this.state.rating}
+            handleFilterChange={this.handleFilterChange}
+            handleSubmit={this.handleSubmit}
+            filterShows={this.filterShows()}
+          />
         }
       </div>
     )
