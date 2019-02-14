@@ -1,12 +1,35 @@
 body {
-  margin: 30px;
-  padding: 30px;
+  margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url("https://lightbox-prod.imgix.net/images/uploads/1523399335140-the-handmaids-tale_s2_1920x1080_16x9.jpg?auto=format&dpr=1&crop=faces%2Ctop%2Cright&fit=crop&w=1500&h=800") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 120px;
+  text-align: center;
 }
+
+/* html {
+  background: url("https://lightbox-prod.imgix.net/images/uploads/1523399335140-the-handmaids-tale_s2_1920x1080_16x9.jpg?auto=format&dpr=1&crop=faces%2Ctop%2Cright&fit=crop&w=1500&h=800") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 120px;
+  text-align: center;
+} */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

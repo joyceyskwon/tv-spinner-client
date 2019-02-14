@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Button} from 'react-materialize'
+import { Modal, Button } from 'react-materialize'
 
 const LogIn = (props) => {
 
@@ -31,7 +31,6 @@ const LogIn = (props) => {
       </Modal>
     </div>
   )
-
 }
 
 export default LogIn

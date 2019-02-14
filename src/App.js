@@ -1,6 +1,7 @@
 import React from 'react'
 import './assets/App.css'
 import ShowContainer from './components/ShowContainer'
+import Authentication from './components/Authentication'
 import Nav from './components/Nav'
 
 export default class App extends React.Component {
@@ -9,7 +10,7 @@ export default class App extends React.Component {
     shows: [],
     genre: '',
     schedule: '',
-    rating: 0,
+    rating: 10,
     currentUser: null,
     loginClicked: false,
     loginName: '',
@@ -183,8 +184,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Nav />
         {!this.state.currentUser ?
-          <Nav
+          <Authentication
             handleLoginChange={this.handleLoginChange}
             handleLoginSubmit={this.handleLoginSubmit}
             loginClicked={this.state.loginClicked}
