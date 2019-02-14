@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, Button} from 'react-materialize'
+import { Modal, Button } from 'react-materialize'
 
 const SignUp = (props) => {
 

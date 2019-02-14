@@ -1,12 +1,23 @@
 import React from 'react'
-import {Button, Icon } from 'semantic-ui-react'
+// import { Button, Icon } from 'semantic-ui-react'
+import { Dropdown, NavItem, Button } from 'react-materialize'
 
 export default class Filter extends React.Component {
+  // <Dropdown
+  //   trigger={<Button>Select Genre</Button>}
+  //   onOpenStart={e=>this.props.handleFilterChange(e)}
+  //   className="genre"
+  //   value={this.props.genre}
+  //   >
+  //   <NavItem value='action'>Action</NavItem>
+  //   <NavItem value='anime'>Anime</NavItem>
+  //   <NavItem value='crime'>Crime</NavItem>
+  //   <NavItem divider />
+  // </Dropdown>
 
   render() {
     return (
       <div>
-
 
         <select
           onChange={e=>this.props.handleFilterChange(e)}
@@ -41,7 +52,7 @@ export default class Filter extends React.Component {
           <option value='Saturday'>Saturday</option>
         </select>
 
-        <label>Rating</label>
+        
         <input
           onChange={e=>this.props.handleFilterChange(e)}
           value={this.props.rating}
@@ -51,15 +62,7 @@ export default class Filter extends React.Component {
           max="10"
         />
 
-        <Button animated
-          onClick={e=>this.props.handleSubmit(e)}
-          type="submit"
-        >
-        <Button.Content visible>Generate!</Button.Content>
-        <Button.Content hidden>
-          <Icon name='arrow right' />
-        </Button.Content>
-        </Button>
+
       </div>
     )
   }
