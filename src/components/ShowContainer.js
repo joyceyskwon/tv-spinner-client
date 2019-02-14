@@ -17,6 +17,8 @@ export default class ShowContainer extends Component {
         <ShowList
           handleSubmit={this.props.handleSubmit}
           shows={this.props.filterShows}
+          handleAddFavorite={this.props.handleAddFavorite}
+          clickedShow={this.props.clickedShow}
         />
       </div>
     )
