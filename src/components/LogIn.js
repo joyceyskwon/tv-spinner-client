@@ -25,6 +25,7 @@ const LogIn = (props) => {
             name="loginPassword"
             placeholder="Password"
           />
+
           <input
             type="Submit"
           />
